@@ -1,0 +1,7 @@
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    container_name: nocodb
+    restart: unless-stopped
+    volumes:
+      - ${NOCODB_DATA}:/usr/app/data

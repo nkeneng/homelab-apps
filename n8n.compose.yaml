@@ -1,0 +1,27 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: n8n_database_postgres
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - default
+    volumes:
+      - ${POSTGRES_DATA}:/var/lib/postgresql/data
+  
+  n8n:
+    image: n8nio/n8n:1.117.3
+    container_name: n8n
+    env_file:
+      - .env
+    networks:
+      - default
+    volumes:
+      - ${N8N_DATA}:/root/.n8n
+      - ${N8N_BACKUP}:/home/node/backup
+    restart: always
+
+networks:
+  default:
