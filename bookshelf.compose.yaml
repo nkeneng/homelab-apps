@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:2.27.0
+    env_file:
+      - .env
+    volumes:
+      - ${BOOKSHELF_BOOKS}:/audiobooks
+      - ${BOOKSHELF_PODCASTS}:/podcasts
+      - ${BOOKSHELF_CONFIG}:/config
+      - ${BOOKSHELF_METADATA}:/metadata
+    restart: unless-stopped
