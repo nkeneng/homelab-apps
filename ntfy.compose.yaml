@@ -8,3 +8,5 @@ services:
       - ${VAR_LIB_NTFY}:/var/lib/ntfy
       - /var/cache/ntfy:/var/cache/ntfy
     restart: always
+    env_file:
+      - .env
