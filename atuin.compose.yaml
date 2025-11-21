@@ -1,0 +1,29 @@
+services:
+  atuin:
+    restart: always
+    image: ghcr.io/atuinsh/atuin:18.3.0
+    command: server start
+    depends_on:
+      - postgresql
+    environment:
+      ATUIN_HOST: "0.0.0.0"
+      ATUIN_OPEN_REGISTRATION: "true"
+      ATUIN_DB_URI: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgresql/$POSTGRES_DB
+      RUST_LOG: info,atuin_server=debug
+    networks: 
+       default:
+    env_file:
+      - .env
+
+  postgresql:
+    image: postgres:14
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ${ATUIN_DB_DATA}:/var/lib/postgresql/data/
+    networks: 
+      default:
+
+networks:
+  default:
