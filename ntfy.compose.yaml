@@ -1,0 +1,10 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:2.14.0
+    command: >
+      serve --cache-file /var/cache/ntfy/cache.db
+    volumes:
+      - ${ETC_NTFY}:/etc/ntfy
+      - ${VAR_LIB_NTFY}:/var/lib/ntfy
+      - /var/cache/ntfy:/var/cache/ntfy
+    restart: always
