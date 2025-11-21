@@ -1,6 +1,6 @@
 services:
   ntfy:
-    image: binwiederhier/ntfy:2.14.0
+    image: binwiederhier/ntfy:v2.14.0
     command: >
       serve --cache-file /var/cache/ntfy/cache.db
     volumes:
