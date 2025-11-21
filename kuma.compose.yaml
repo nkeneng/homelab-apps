@@ -1,0 +1,7 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - ${UPTIME_KUMA_DATA}:/app/data
+    restart: unless-stopped
