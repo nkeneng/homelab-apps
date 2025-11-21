@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: metabase_database
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - default
+    env_file:
+      - .env
+    volumes:
+      - ${MYSQL_DATA}:/var/lib/mysql:rw
+    
+  metabase:
+    image: metabase/metabase:0.55.10
+    restart: always
+    container_name: metabase
+    env_file:
+      - .env
+    networks:
+      default:
+
+networks:
+  default:
