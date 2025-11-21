@@ -5,7 +5,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ${DB}:/var/lib/mysql
+      - ${PASSBOLT_DB}:/var/lib/mysql
     networks: 
       - default
 
@@ -19,8 +19,8 @@ services:
     networks: 
       - default
     volumes:
-      - ${GPG}:/etc/passbolt/gpg
-      - ${JWT}:/etc/passbolt/jwt
+      - ${PASSBOLT_GPG}:/etc/passbolt/gpg
+      - ${PASSBOLT_JWT}:/etc/passbolt/jwt
     command: ["/usr/bin/wait-for.sh", "-t", "0", "db:3306", "--", "/docker-entrypoint.sh"]
 
 networks: 
