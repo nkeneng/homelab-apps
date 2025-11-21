@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   dbeaver:
-    image: dbeaver/cloudbeaver:24.04
+    image: dbeaver/cloudbeaver:24.0.5
     container_name: dbeaver
     restart: unless-stopped
     env_file:
