@@ -5,11 +5,6 @@ services:
     command: server start
     depends_on:
       - postgresql
-    environment:
-      ATUIN_HOST: "0.0.0.0"
-      ATUIN_OPEN_REGISTRATION: "true"
-      ATUIN_DB_URI: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgresql/$POSTGRES_DB
-      RUST_LOG: info,atuin_server=debug
     networks: 
        default:
     env_file:
@@ -27,3 +22,4 @@ services:
 
 networks:
   default:
+
