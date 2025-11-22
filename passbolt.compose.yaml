@@ -10,7 +10,7 @@ services:
       - default
 
   passbolt:
-    image: passbolt/passbolt:latest-ce
+    image: passbolt/passbolt:5.4.0-1-ce
     restart: unless-stopped
     env_file:
       - .env
