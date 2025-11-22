@@ -12,7 +12,7 @@ services:
       - ${POSTGRES_DATA}:/var/lib/postgresql/data
   
   n8n:
-    image: n8nio/n8n:1.117.3
+    image: n8nio/n8n:1.120.4
     container_name: n8n
     env_file:
       - .env
