@@ -1,0 +1,57 @@
+services:  
+  backend:  
+    container_name: infisical-backend  
+    image: infisical/infisical:v0.146.0-postgres
+    restart: unless-stopped  
+    depends_on:  
+      db:  
+        condition: service_healthy  
+      redis:  
+        condition: service_started  
+      db-migration:  
+        condition: service_completed_successfully  
+    pull_policy: always  
+    env_file: .env  
+    networks:  
+      - infisical
+
+  redis:  
+    container_name: infisical-redis  
+    image: redis:8.4.0-alpine3.22 
+    restart: unless-stopped  
+    env_file: .env  
+    volumes:  
+      - ${REDIS_VOLUME}:/data  
+    networks:  
+      - infisical
+
+  db:  
+    container_name: infisical-db  
+    image: postgres:14-alpine  
+    restart: unless-stopped  
+    env_file: .env  
+    volumes:  
+      - ${POSTGRES_VOLUME}:/var/lib/postgresql/data  
+    networks:  
+      - infisical  
+    healthcheck:  
+      test: "pg_isready --username=${POSTGRES_USER} && psql --username=${POSTGRES_USER} --list"  
+      interval: 5s  
+      timeout: 10s  
+      retries: 10  
+    
+
+  db-migration:  
+    container_name: infisical-db-migration  
+    depends_on:  
+      db:  
+        condition: service_healthy  
+    image: infisical/infisical:v0.146.0-postgres
+    env_file: .env  
+    command: npm run migration:latest  
+    pull_policy: always  
+    networks:  
+      - infisical
+
+networks:  
+  infisical:
