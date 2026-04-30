@@ -31,5 +31,6 @@ services:
     depends_on:
       - n8n
 
+
 networks:
   default:
