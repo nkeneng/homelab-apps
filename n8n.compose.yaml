@@ -22,6 +22,12 @@ services:
       - ${N8N_DATA}:/root/.n8n
       - ${N8N_BACKUP}:/home/node/backup
     restart: always
+  
+  task-runners:
+    image: n8nio/runners:2.19.2-amd64
+    container_name: n8n-runners
+    depends_on:
+      - n8n
 
 networks:
   default:
