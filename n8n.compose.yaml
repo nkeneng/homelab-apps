@@ -21,7 +21,6 @@ services:
     volumes:
       - ${N8N_DATA}:/root/.n8n
       - ${N8N_BACKUP}:/home/node/backup
-      - ./n8n-task-runners.json:/etc/n8n-task-runners.json
     restart: always
   
   task-runners:
@@ -29,8 +28,8 @@ services:
     container_name: n8n-runners
     networks:
       - default
-    volumes:
-      - ./n8n-task-runners.json:/etc/n8n-task-runners.json
+    # volumes:
+    #   - ./n8n-task-runners.json:/etc/n8n-task-runners.json
     env_file:
       - .env
     depends_on:
