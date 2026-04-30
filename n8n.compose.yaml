@@ -27,6 +27,10 @@ services:
   task-runners:
     image: n8nio/runners:2.19.2-amd64
     container_name: n8n-runners
+    networks:
+      - default
+    volumes:
+      - ./n8n-task-runners.json:/etc/n8n-task-runners.json
     env_file:
       - .env
     depends_on:
