@@ -26,6 +26,8 @@ services:
   task-runners:
     image: n8nio/runners:2.19.2-amd64
     container_name: n8n-runners
+    env_file:
+      - .env
     depends_on:
       - n8n
 
